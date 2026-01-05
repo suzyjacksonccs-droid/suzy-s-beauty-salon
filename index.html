@@ -9,7 +9,7 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background: #fff0f5; /* light pink background */
+            background: #fff0f5;
             color: #333;
         }
         a { text-decoration: none; color: inherit; }
@@ -58,11 +58,6 @@
         .service-item:hover {
             transform: translateY(-10px);
         }
-        .service-item img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
         .service-item h3 {
             margin-top: 0;
             color: #ff1493;
@@ -108,6 +103,32 @@
             background: #ff1493;
         }
 
+        /* Success Message */
+        .success-message {
+            margin-top: 20px;
+            color: #fff;
+            background-color: #ff69b4;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            display: none;
+            opacity: 0;
+            animation: pulse 1s infinite;
+        }
+
+        /* Pulse animation for sparkle effect */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 20px rgba(255,255,255,0.6); }
+            100% { box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        }
+
+        /* Fade out animation */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
         /* Footer */
         footer {
             background: #ffb6c1;
@@ -136,17 +157,14 @@
         <h2>Our Services</h2>
         <div class="service-list">
             <div class="service-item">
-                <img src="https://images.unsplash.com/photo-1595526111184-4ee8e2f04264?auto=format&fit=crop&w=400&q=80" alt="Manicure">
                 <h3>Manicure & Pedicure</h3>
                 <p>Elegant nail designs with premium products.</p>
             </div>
             <div class="service-item">
-                <img src="https://images.unsplash.com/photo-1600180758895-0c184a7a66c2?auto=format&fit=crop&w=400&q=80" alt="Hair Styling">
                 <h3>Hair Styling</h3>
                 <p>Trendy cuts, coloring, and styling for all occasions.</p>
             </div>
             <div class="service-item">
-                <img src="https://images.unsplash.com/photo-1592753294931-18b0d22cbe99?auto=format&fit=crop&w=400&q=80" alt="Facial">
                 <h3>Facial Treatments</h3>
                 <p>Revitalizing treatments for glowing skin.</p>
             </div>
@@ -169,6 +187,9 @@
             </select>
             <button type="submit">Book Now</button>
         </form>
+        <div class="success-message" id="successMessage">
+            You have successfully booked! Your appointment is confirmed.
+        </div>
     </section>
 
     <!-- Footer -->
@@ -179,16 +200,21 @@
 
     <!-- Make.com Webhook Integration -->
     <script>
-        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        const form = document.getElementById('bookingForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const formData = {
-                name: this.name.value,
-                email: this.email.value,
-                phone: this.phone.value,
+                name: this.name.value.trim(),
+                email: this.email.value.trim(),
+                phone: this.phone.value.trim(),
                 date: this.date.value,
-                service: this.service.value
+                service: this.service.value.trim()
             };
+
+            console.log("Sending booking:", formData);
 
             try {
                 const response = await fetch('https://hook.us2.make.com/6sokp46tmei5u1n9rxzyh2m0s2msrere
@@ -199,8 +225,21 @@
                 });
 
                 if (response.ok) {
-                    alert('Thank you! Your booking has been sent.');
-                    this.reset();
+                    // Show success message with animation
+                    successMessage.style.display = 'block';
+                    successMessage.style.opacity = '1';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                    // Fade out after 10 seconds
+                    setTimeout(() => {
+                        successMessage.style.transition = 'opacity 1s';
+                        successMessage.style.opacity = '0';
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 1000);
+                    }, 5000);
+
+                    form.reset();
                 } else {
                     alert('Oops! Something went wrong. Try again.');
                 }
@@ -213,4 +252,3 @@
 
 </body>
 </html>
-       
