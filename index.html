@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suzy's Pink Aura Salon</title>
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #fff0f5; /* light pink background */
+            color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #ffb6c1, #fff);
+            text-align: center;
+            padding: 80px 20px;
+        }
+        header h1 {
+            font-size: 3em;
+            color: #fff;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .services h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #ff69b4;
+        }
+        .service-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .service-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .service-item h3 {
+            margin-top: 0;
+            color: #ff1493;
+        }
+
+        /* Booking Form */
+        .booking {
+            background: #ffe4e1;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .booking h2 {
+            color: #ff1493;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input, textarea, select {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ffb6c1;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #ff69b4;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff1493;
+        }
+
+        /* Footer */
+        footer {
+            background: #ffb6c1;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .service-list { flex-direction: column; align-items: center; }
+            header h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header>
+        <h1>Suzy's Pink Aura Salon</h1>
+        <p>Luxury Beauty Experience in Every Visit</p>
+    </header>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-list">
+            <div class="service-item">
+                <h3>Manicure & Pedicure</h3>
+                <p>Elegant nail designs with premium products.</p>
+            </div>
+            <div class="service-item">
+                <h3>Hair Styling</h3>
+                <p>Trendy cuts, coloring, and styling for all occasions.</p>
+            </div>
+            <div class="service-item">
+                <h3>Facial Treatments</h3>
+                <p>Revitalizing treatments for glowing skin.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section class="booking">
+        <h2>Book Your Appointment</h2>
+        <form id="bookingForm">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="tel" name="phone" placeholder="Your Phone Number" required>
+            <input type="date" name="date" required>
+            <select name="service" required>
+                <option value="">Select Service</option>
+                <option value="Manicure & Pedicure">Manicure & Pedicure</option>
+                <option value="Hair Styling">Hair Styling</option>
+                <option value="Facial Treatments">Facial Treatments</option>
+            </select>
+            <button type="submit">Book Now</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Suzy's Pink Aura Salon. All rights reserved.</p>
+        <p>Contact: info@pinkaurasalon.com | +20 123 456 7890</p>
+    </footer>
+
+    <script>
+        // Simple form submission (just alert for now)
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! Your booking request has been received.');
+            this.reset();
+        });
+    </script>
+
+</body>
+</html>
